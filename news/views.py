@@ -14,6 +14,13 @@ from django.shortcuts import get_object_or_404,render
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 
+from django.http import HttpResponse
+from django.views import View
+from .tasks import hello
+class IndexView(View):
+    def get(self, request):
+        hello.delay()
+        return HttpResponse('Hello!')
 class PostsList(ListView):
     queryset = Post.objects.order_by('-time_in')
     template_name = 'posts.html'
