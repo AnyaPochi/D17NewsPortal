@@ -16,11 +16,11 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 from django.views import View
-from .tasks import hello
-class IndexView(View):
-    def get(self, request):
-        hello.delay()
-        return HttpResponse('Hello!')
+# from .tasks import hello
+# class IndexView(View):
+#     def get(self, request):
+#         hello.delay()
+#         return HttpResponse('Hello!')
 class PostsList(ListView):
     queryset = Post.objects.order_by('-time_in')
     template_name = 'posts.html'
@@ -104,5 +104,7 @@ def subscribe(request, pk):
     user = request.user
     category = Category.objects.get(id=pk)
     category.subscribers.add(user)
-    message = 'Вы подписали на рассылку новостей в категории'
+    message = 'Вы подписались на рассылку новостей в категории'
     return render(request, 'subscribe.html', {'category':category,'message': message})
+
+
