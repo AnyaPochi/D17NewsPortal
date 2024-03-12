@@ -13,7 +13,7 @@ from news.models import PostCategory
 from django.template.loader import render_to_string
 from django.conf import settings
 
-
+@shared_task
 def send_notifications(preview, pk, title, subscribers):
     html_content = render_to_string(
         'post_created_email.html',
@@ -34,7 +34,7 @@ def send_notifications(preview, pk, title, subscribers):
 
 
 
-@shared_task
+
 @receiver(m2m_changed,sender =PostCategory)
 def notify_about_new_post(sender,instance,**kwargs):
     if kwargs['action'] == 'post_add':
@@ -45,4 +45,4 @@ def notify_about_new_post(sender,instance,**kwargs):
             subscribers = cat.subscribers.all()
             subscribers_emails += [s.email for s in subscribers]
 
-        send_notifications(instance.preview(), instance.pk, instance.title, subscribers_emails)
+        send_notifications.delay(instance.preview(), instance.pk, instance.title, subscribers_emails)
