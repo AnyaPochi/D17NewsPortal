@@ -1,25 +1,19 @@
-from datetime import datetime, timedelta
+import datetime
+from datetime import timedelta, datetime
 
 from celery import shared_task
 from project.celery import app
 from celery.schedules import crontab
-# import time
-# from .models import Category
-# @shared_task
-# def hello():
-#     time.sleep(2)
-#     print("Hello, world!")
 
 from django.core.mail import EmailMultiAlternatives
-from django.db.models.signals import m2m_changed, post_save
-from django.dispatch import receiver
-from news.models import PostCategory, Post, Category
+
+from news.models import Post, Category
 from django.template.loader import render_to_string
 from django.conf import settings
 
 
 # отправка писем подписчикам с новой новостью в разделе
-@shared_task
+
 def send_notifications(preview, pk, title, subscribers):
     html_content = render_to_string(
         'post_created_email.html',
@@ -41,22 +35,22 @@ def send_notifications(preview, pk, title, subscribers):
 
 
 
-@receiver(m2m_changed,sender =PostCategory)
-def notify_about_new_post(sender,instance,**kwargs):
-    if kwargs['action'] == 'post_add':
-        categories = instance.category.all()
-        subscribers_emails = []
+@shared_task
+def notify_about_new_post(pk):
+    post =Post.objects.get(pk=pk)
+    categories = post.category.all()
+    subscribers_emails = []
 
-        for cat in categories:
-            subscribers = cat.subscribers.all()
-            subscribers_emails += [s.email for s in subscribers]
+    for cat in categories:
+        subscribers = cat.subscribers.all()
+        subscribers_emails += [s.email for s in subscribers]
 
-        send_notifications.delay(instance.preview(), instance.pk, instance.title, subscribers_emails)
+    send_notifications(post.preview(), post.pk, post.title, subscribers_emails)
 
 # отправка еженедельных подборок
 @shared_task
 def my_job():
-    today=datetime.datetime.now()
+    today = datetime.now()
     last_week = today - timedelta(days=7)
     posts = Post.objects.filter(time_in__gte=last_week)
     categories = set(posts.values_list('category__name', flat=True))
@@ -78,10 +72,4 @@ def my_job():
     msg.send()
 
 
-app.conf.beat_schedule = {
-    'weekly_news_subscribe': {
-        'task': 'my_job',
-        'schedule': crontab(hour=10, minute=52, day_of_week='wednesday'),
-    },
-}
 
