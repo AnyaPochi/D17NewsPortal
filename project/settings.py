@@ -227,21 +227,21 @@ LOGGING = {
         'file_info': {
             'level': 'INFO',
             'filters': ['require_debug_false'],
-            'class': 'logging.StreamHandler',
+            'class': 'logging.FileHandler',
             'formatter': 'file_1',
             'filename': 'logs/general.log'
         },
         'file_err': {
             'level': 'ERROR',
             'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
+            'class': 'logging.FileHandler',
             'formatter': 'file_2',
             'filename': 'logs/error.log'
         },
         'file_sec': {
             'level': 'ERROR',
             'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
+            'class': 'logging.FileHandler',
             'formatter': 'file_1',
             'filename': 'logs/security.log'
         },
