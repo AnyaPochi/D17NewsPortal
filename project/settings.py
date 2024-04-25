@@ -13,7 +13,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
-
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
