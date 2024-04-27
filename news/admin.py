@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Category, Author, Post, PostCategory, Comment,UserCategory
-
+from modeltranslation.admin import TranslationAdmin # импортируем модель амдинки (вспоминаем модуль про переопределение стандартных админ-инструментов)
 # создаём новый класс для представления постов в админке
 class PostAdmin(admin.ModelAdmin):
 
@@ -11,9 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('title','time_in','category')  # добавляем примитивные фильтры в нашу админку
      # добавляем примитивные фильтры в нашу админку
     # search_fields = ('title', 'category','time_in')  # тут всё очень похоже на фильтры из запросов в базу
-#не сработало
-# class PostInline(admin.TabularInline):
-#     model = Post.category.through
+
 
 
 # @admin.register(Category)
@@ -22,7 +20,16 @@ class PostAdmin(admin.ModelAdmin):
 #     inlines = [
 #         PostInline,
 #     ]
+# class CategoryAdmin(TranslationAdmin):
+#     model = Category
 
+
+class PostAdmin(TranslationAdmin):
+    model = Post
+
+
+admin.site.register(Post)
+admin.site.register(Category)
 admin.site.register(Category)
 admin.site.register(Author)
 admin.site.register(Post, PostAdmin)

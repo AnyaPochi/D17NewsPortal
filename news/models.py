@@ -5,6 +5,8 @@ from django.db.models.functions import Coalesce
 
 from django.core.validators import MinValueValidator
 from django.urls import reverse
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
 
 # Модель Author
 class Author(models.Model):
@@ -33,7 +35,7 @@ class Author(models.Model):
 
 # Модель Category
 class Category(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, help_text=_('имя категории'), unique=True)
     subscribers = models.ManyToManyField(User, blank=True,null=True, related_name='categories')
     def __str__(self):
         return self.name

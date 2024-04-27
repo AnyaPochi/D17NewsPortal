@@ -1,4 +1,5 @@
 
+
 from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
@@ -18,6 +19,7 @@ LOCALE_PATHS = [
 ]
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     # 'django_apscheduler.contrib',
     'django_apscheduler',
+
 
 ]
 
@@ -114,9 +117,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('ru', 'Русский')
+]
 
-
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
