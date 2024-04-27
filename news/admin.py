@@ -20,16 +20,16 @@ class PostAdmin(admin.ModelAdmin):
 #     inlines = [
 #         PostInline,
 #     ]
-# class CategoryAdmin(TranslationAdmin):
-#     model = Category
+class CategoryAdmin(TranslationAdmin):
+    model = Category
 
 
 class PostAdmin(TranslationAdmin):
     model = Post
 
 
-admin.site.register(Post)
-admin.site.register(Category)
+
+
 admin.site.register(Category)
 admin.site.register(Author)
 admin.site.register(Post, PostAdmin)

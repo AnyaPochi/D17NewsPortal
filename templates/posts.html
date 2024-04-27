@@ -1,16 +1,17 @@
          <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
+{% load i18n %}
 {% load custom_filters %}
 {% load custom_tags %}
 {% load i18n %}
-<!-- Название у нас будет products -->
+
 {% block title %}
-Posts
+{% trans "Статьи" %}
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим все статьи -->
 {% block content %}
-    <h1>Все статьи</h1>
+    <h1>{% trans "Все статьи" %}</h1>
     <h3>{{ time_now|date:'d M Y' }}</h3>
     <h3> {{ posts|length }} </h3>
     <hr>
@@ -19,11 +20,11 @@ Posts
    {% if posts %}
        <table>
            <tr>
-               <td>Заголовок</td>
-               <td>Дата</td>
-               <td>Текст</td>
-               <td>Тип</td>
-               <td>Категории</td>
+               <td>{% trans "Заголовок" %}</td>
+               <td>{% trans "Дата" %}</td>
+               <td>{% trans "Текст" %}</td>
+               <td>{% trans "Тип" %}</td>
+               <td>{% trans "Категории" %}</td>
            </tr>
 
 

@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\news\models.py:38
 msgid "имя категории"
-msgstr ""
+msgstr "category name"
 
 #: .\news\views.py:106
 msgid "Вы подписались на рассылку новостей в категории"
@@ -28,7 +28,7 @@ msgstr "You have subscribed to the newsletter in the category"
 
 #: .\templates\category_list.html:15
 msgid "Все статьи"
-msgstr ""
+msgstr "All articles"
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:518
 #, python-brace-format
