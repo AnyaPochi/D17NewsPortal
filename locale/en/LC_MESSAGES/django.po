@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 20:10+0500\n"
+"POT-Creation-Date: 2024-04-29 17:21+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,61 @@ msgstr ""
 msgid "имя категории"
 msgstr "category name"
 
-#: .\news\views.py:106
+#: .\news\models.py:55
+msgid "автор"
+msgstr "Author"
+
+#: .\news\models.py:56
+msgid "тип"
+msgstr "Type"
+
+#: .\news\models.py:61
+msgid "заголовок"
+msgstr "Title"
+
+#: .\news\models.py:64
+msgid "текст"
+msgstr "Text"
+
+#: .\news\models.py:65
+msgid "рейтинг"
+msgstr "Rating"
+
+#: .\news\views.py:115
 msgid "Вы подписались на рассылку новостей в категории"
 msgstr "You have subscribed to the newsletter in the category"
 
-#: .\templates\category_list.html:15
+#: .\templates\category_list.html:16 .\templates\posts.html:14
 msgid "Все статьи"
 msgstr "All articles"
+
+#: .\templates\category_list.html:25 .\templates\posts.html:23
+msgid "Заголовок"
+msgstr "Title"
+
+#: .\templates\category_list.html:26 .\templates\posts.html:24
+msgid "Дата"
+msgstr "Date"
+
+#: .\templates\category_list.html:27 .\templates\posts.html:25
+msgid "Текст"
+msgstr "Text"
+
+#: .\templates\category_list.html:28 .\templates\posts.html:26
+msgid "Тип"
+msgstr "Type"
+
+#: .\templates\category_list.html:29 .\templates\posts.html:27
+#, fuzzy
+#| msgid "имя категории"
+msgid "Категории"
+msgstr "Category name"
+
+#: .\templates\posts.html:9
+#, fuzzy
+#| msgid "Статья"
+msgid "Статьи"
+msgstr "Article"
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:518
 #, python-brace-format
@@ -1608,6 +1656,3 @@ msgstr ""
 #, python-format
 msgid "Unable to connect to qpid with SASL mechanism %s"
 msgstr ""
-
-#~ msgid "Статья"
-#~ msgstr "Article"

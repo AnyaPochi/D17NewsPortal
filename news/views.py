@@ -18,17 +18,26 @@ from django.http import HttpResponse
 from django.views import View
 from django.utils.translation import gettext as _
 
+from django.utils import timezone
+import pytz
+from django.shortcuts import redirect
 class PostsList(ListView):
     queryset = Post.objects.order_by('-time_in')
     template_name = 'posts.html'
     context_object_name = 'posts'
     paginate_by = 10
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['time_now'] = datetime.utcnow()
+        # context['time_now'] = datetime.utcnow()
+        context['time_now'] = timezone.now()
+        context['timezones'] = pytz.common_timezones
         return context
+
+        #  по пост-запросу будем добавлять в сессию часовой пояс, который и будет обрабатываться написанным нами ранее middleware
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/news/')
 
 class PostDetail(DetailView):
     queryset = Post.objects.order_by('-time_in')

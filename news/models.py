@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
-
+from django.utils import timezone
 # Модель Author
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -52,16 +52,17 @@ class Post(models.Model):
         (NEWS, 'Новость'),
         (ARTICLE, 'Статья')
     ]
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    type = models.CharField(max_length=20, choices=POSITIONS, default=NEWS)
+    author = models.ForeignKey(Author, help_text=_('автор'), on_delete=models.CASCADE)
+    type = models.CharField(max_length=20, help_text=_('тип'),choices=POSITIONS, default=NEWS)
     time_in = models.DateTimeField(auto_now_add=True)
-    category = models.ManyToManyField(Category, through='PostCategory')
+    category = models.ManyToManyField(Category, verbose_name=pgettext_lazy('категория: может быть любой'),through='PostCategory')
     title = models.CharField(
         max_length=255,
+        help_text=_('заголовок'),
         unique=True,
     )
-    text = models.TextField()
-    rating = models.IntegerField(default=0)
+    text = models.TextField(help_text=_('текст'),)
+    rating = models.IntegerField(help_text=_('рейтинг'), default=0)
 
     # Методы like() и dislike() в моделях Comment и Post, которые увеличивают/уменьшают рейтинг на единицу.
     def like(self):
