@@ -22,7 +22,7 @@ class CategoryAdmin(TranslationAdmin):
     model = Category
 
 
-class PostAdmin(TranslationAdmin):
+class PostTranslationAdmin(PostAdmin, TranslationAdmin):
     model = Post
 
 
@@ -30,7 +30,7 @@ class PostAdmin(TranslationAdmin):
 
 admin.site.register(Category)
 admin.site.register(Author)
-admin.site.register(Post, PostAdmin)
+admin.site.register(Post, PostTranslationAdmin)
 admin.site.register(PostCategory)
 admin.site.register(Comment)
 admin.site.register(UserCategory)

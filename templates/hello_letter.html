@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+{% load i18n %}
 <head>
     <meta charset="UTF-8">
-    <title>Приветсвенное письмо</title>
+    <title>{% trans "Приветственное письмо" %}</title>
 </head>
 <body>
-    <h2> Здравствуйте! Спасибо за регистрацию на нашем портале</h2>
+    <h2> {% trans "Здравствуйте! Спасибо за регистрацию на нашем портале" %}</h2>
     <ul>
-        <li><a href="http://127.0.0.1:8000/news/"> Новости </a></li>
+        <li><a href="http://127.0.0.1:8000/news/"> {% trans "Новости" %} </a></li>
     </ul>
 
 </body>

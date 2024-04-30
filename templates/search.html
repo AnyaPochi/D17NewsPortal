@@ -2,13 +2,14 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
 <!-- Название у нас будет products -->
 {% block title %}
-Search
+{% trans "Поиск" %}
 {% endblock title %}
 
 {% block content %}
-   <h1>Статьи</h1>
+   <h1>{% trans "Статьи" %}</h1>
 
    {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
    <form action="" method="get">
@@ -22,9 +23,9 @@ Search
     {% if posts %}
         <table>
             <tr>
-                <td>Заголовок</td>
-                <td>Дата</td>
-                <td>Текст</td>
+                <td>{% trans "Заголовок" %}</td>
+                <td>{% trans "Дата" %}</td>
+                <td>{% trans "Текст" %}</td>
             </tr>
 
 

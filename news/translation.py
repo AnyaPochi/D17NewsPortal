@@ -12,4 +12,4 @@ class CategoryTranslationOptions(TranslationOptions):
 
 @register(Post)
 class PostTranslationOptions(TranslationOptions):
-    fields = ('author','type','category','title','text','rating')
+    fields = ('title','text')

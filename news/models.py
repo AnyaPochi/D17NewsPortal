@@ -6,7 +6,7 @@ from django.db.models.functions import Coalesce
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
+from django.utils.translation import gettext_lazy # импортируем «ленивый» геттекст с подсказкой
 from django.utils import timezone
 # Модель Author
 class Author(models.Model):
@@ -55,7 +55,7 @@ class Post(models.Model):
     author = models.ForeignKey(Author, help_text=_('автор'), on_delete=models.CASCADE)
     type = models.CharField(max_length=20, help_text=_('тип'),choices=POSITIONS, default=NEWS)
     time_in = models.DateTimeField(auto_now_add=True)
-    category = models.ManyToManyField(Category, verbose_name=pgettext_lazy('категория: может быть любой'),through='PostCategory')
+    category = models.ManyToManyField(Category, verbose_name=gettext_lazy('категория: может быть любой'),through='PostCategory')
     title = models.CharField(
         max_length=255,
         help_text=_('заголовок'),
