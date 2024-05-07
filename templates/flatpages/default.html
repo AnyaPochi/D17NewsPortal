@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load i18n %}
-{% load tz %} <!-- не забываем загрузить тег для работы с часовыми поясами -->
+{% load tz %}
+{% load static %}
+<!-- не забываем загрузить тег для работы с часовыми поясами -->
 <html lang="ru">
     <head>
         <meta charset="utf-8" />
@@ -9,14 +11,14 @@
         <meta name="text" content="" />
         <meta name="author" content="" />
         <title>{% trans "Новостной портал" %}</title>
+        <!-- Если сейчас больше чем 19 или же меньше 7, то выводим тёмную тему, иначе выводим светлую -->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <style>
             body {background-color: {% if current_time.hour >= 19 or current_time.hour <= 7 %} darkcyan {% else %} powderblue {% endif %};}
         </style>
         <!-- Favicon-->
-        {% load static %}
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
     <body>
         <form action="{% url 'set_language' %}" method="POST">
