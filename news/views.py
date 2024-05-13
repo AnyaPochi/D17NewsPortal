@@ -21,6 +21,14 @@ from django.utils.translation import gettext as _
 from django.utils import timezone
 import pytz
 from django.shortcuts import redirect
+
+from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework import permissions
+
+from news.serializers import *
+from news.models import *
+
 class PostsList(ListView):
     queryset = Post.objects.order_by('-time_in')
     template_name = 'posts.html'
@@ -30,7 +38,7 @@ class PostsList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # context['time_now'] = datetime.utcnow()
-        context['current_time'] = timezone.now()
+        context['current_time'] = timezone.localtime(timezone.now())
         context['timezones'] = pytz.common_timezones
         return context
 
@@ -116,3 +124,11 @@ def subscribe(request, pk):
     return render(request, 'subscribe.html', {'category':category,'message': message})
 
 
+class NewsViewset(viewsets.ModelViewSet):
+   queryset = Post.objects.filter(type='NW')
+   serializer_class = NewsSerializer
+
+#
+class ArtcViewset(viewsets.ModelViewSet):
+   queryset = Post.objects.filter(type='AR')
+   serializer_class = NewsSerializer
