@@ -57,6 +57,10 @@ class PostDetail(DetailView):
         context['time_now'] = datetime.utcnow()
         return context
 
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/news/<int:pk>/')
+
 class PostsSearch(ListView):
     model = Post
     template_name = 'search.html'
